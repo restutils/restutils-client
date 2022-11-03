@@ -10,8 +10,8 @@ const CONSTANT_SUFFIX = '_BASE';
 const URL_TOKEN       = '%URL%';
 const NAME_TOKEN      = '%NAME%';
 const EMPTY           = ' ';
-const POST_FN         = "async (data) => http.doPost(`${%NAME%}/%URL%`, data),"
-const GET_FN          = "async (data) => http.doGet(`${%NAME%}/%URL%`),"
+const POST_FN         = "async (data) => http.doPost(`${%NAME%}/%URL%`, data)"
+const GET_FN          = "async (data) => http.doGet(`${%NAME%}/%URL%`)"
 const FN_PREFIX       = 'const %NAME% = ';
 const FN_SUFFIX       = ';';
 const EXPORT_START    = 'module.exports = {';
