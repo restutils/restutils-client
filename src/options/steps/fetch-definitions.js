@@ -1,4 +1,4 @@
-const _  = require('../../utils');
+const _  = require('restutils-helpers');
 
 const ALPHA           = 'abcdefghijklmnopqrstuvwxyz';
 const DEFAULT_NAME    = 'client';

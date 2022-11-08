@@ -1,6 +1,6 @@
 {
   "name"        : "restutils-client",
-  "version"     : "0.0.2",
+  "version"     : "0.1.0",
   "description" : "Generate local client library for the RESTUtils Host",
   "main"        : "src/index.js",
   "preferGlobal": true,
@@ -50,8 +50,9 @@
     "eslint-plugin-standard"   : "^4.1.0"
   },
   "dependencies": {
-    "node-fetch": "^2.6.7",
-    "rimraf"    : "^3.0.2",
-    "yargs"     : "^17.6.0"
+    "node-fetch"       : "^2.6.7",
+    "restutils-helpers": "^0.0.2",
+    "rimraf"           : "^3.0.2",
+    "yargs"            : "^17.6.0"
   }
 }

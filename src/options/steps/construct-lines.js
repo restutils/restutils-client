@@ -1,5 +1,5 @@
 const path = require('path');
-const _    = require('../../utils');
+const _    = require('restutils-helpers');
 
 const HEADER          = [
   "const http = require('./http');",
@@ -10,6 +10,7 @@ const CONSTANT_SUFFIX = '_BASE';
 const URL_TOKEN       = '%URL%';
 const NAME_TOKEN      = '%NAME%';
 const EMPTY           = ' ';
+const ANY_FN          = "async (data) => data ? http.doPost(`${%NAME%}/%URL%`, data) : http.doGet(`${%NAME%}/%URL%`)"
 const POST_FN         = "async (data) => http.doPost(`${%NAME%}/%URL%`, data)"
 const GET_FN          = "async (data) => http.doGet(`${%NAME%}/%URL%`)"
 const FN_PREFIX       = 'const %NAME% = ';
@@ -35,7 +36,7 @@ const getConstantsSection = (opts) => {
     
     dev.constant = name;
 
-    lines.push(CONSTANT.replace(NAME_TOKEN, name).replace(URL_TOKEN, url));
+    lines.push(CONSTANT.replaceAll(NAME_TOKEN, name).replaceAll(URL_TOKEN, url));
   });
   return lines;
 }
@@ -46,22 +47,27 @@ const populateFunctions = (constantName, obj, curUrl) => {
     const url = curUrl ? `${curUrl}/${key}` : key;
     let value = null;
     if (obj[key] === 'POST') {
-      value = POST_FN.replace(NAME_TOKEN, constantName).replace(URL_TOKEN, url);
+      value = POST_FN.replaceAll(NAME_TOKEN, constantName).replaceAll(URL_TOKEN, url);
       obj[key] = value
     } else if (obj[key] === 'GET') {
-      value = GET_FN.replace(NAME_TOKEN, constantName).replace(URL_TOKEN, url);
+      value = GET_FN.replaceAll(NAME_TOKEN, constantName).replaceAll(URL_TOKEN, url);
+      obj[key] = value
+    } else if (obj[key] === 'ANY') {
+      value = ANY_FN
+        .replaceAll(NAME_TOKEN, constantName).replaceAll(URL_TOKEN, url)
+        .replaceAll('/*', '/');
       obj[key] = value
     } else {
+      // populateFunctions(constantName, obj[key === '*' ? 'any' : key], url);
       populateFunctions(constantName, obj[key], url);
     }
-
   });
 
 }
 const convertKeys = obj => {
   const oldKeys = [];
   Object.keys(obj).forEach(key => {
-    const newKey = _.toCamelCase(key);
+    const newKey = _.toCamelCase(key === '*' ? 'any' : key);
     if (newKey !== key) {
       oldKeys.push(key);
       obj[newKey] = obj[key];
@@ -130,7 +136,7 @@ const constructLines = async (opts) => {
     definition.lines = await convertToLines(definition.data);
     
     const name    = _.toCamelCase(definition.name);
-    const prefix  = FN_PREFIX.replace(NAME_TOKEN, name);
+    const prefix  = FN_PREFIX.replaceAll(NAME_TOKEN, name);
     const lastPos = definition.lines.length - 1;
 
     definition.lines[0]       = `${prefix}${definition.lines[0]}`;
@@ -139,7 +145,7 @@ const constructLines = async (opts) => {
     opts.lines.push(EMPTY);
     opts.lines.push(...definition.lines);
 
-    exportLines.push(EXPORT_LINE.replace(NAME_TOKEN, name));
+    exportLines.push(EXPORT_LINE.replaceAll(NAME_TOKEN, name));
   }
   exportLines.push(EXPORT_END);
  

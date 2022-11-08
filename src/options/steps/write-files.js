@@ -1,6 +1,6 @@
 const os   = require('os');
 const path = require('path');
-const _    = require('../../utils');
+const _    = require('restutils-helpers');
 
 const TEMPLATES_FOLDER = path.resolve(path.join(__dirname, '../../templates'));
 const HTTP_FILENAME    = 'http.js';

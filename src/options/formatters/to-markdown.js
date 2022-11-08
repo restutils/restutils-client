@@ -1,7 +1,8 @@
-const _ = require('../../utils');
+const _   = require('restutils-helpers');
+const c   = require('../constants');
 const def = require('../definition');
 
-const { BOOLEAN, NUMBER, STRING, ARRAY, PATH, FUNCTION } = _.constants.OPTION_TYPE;
+const { BOOLEAN, NUMBER, STRING, ARRAY, PATH, FUNCTION } = c.OPTION_TYPE;
 const COL_DELIM = '~';
 
 const toMarkdown = (forCli) => {
@@ -15,18 +16,7 @@ const toMarkdown = (forCli) => {
     const opt  = def[key];
     const name = `\`${(forCli ? _.toKebabCase(key) : key)}\``;
     const desc = opt.name;
-    // let type = '';
-    // if (opt.type === 'boolean') {
-    //   type = '`boolean`';
-    // } else if (opt.type === 'number') {
-    //   type = '`number`';
-    // } else if (opt.isPath) {
-    //   type = '`string (path)`';
-    // } else if (opt.isArray) {
-    //   type = '`string | string[]`';
-    // } else if (opt === 'string') {
-    //   type = '`string`';
-    // }
+
     let defValue = '';
     switch (opt.type) {
       case BOOLEAN:
