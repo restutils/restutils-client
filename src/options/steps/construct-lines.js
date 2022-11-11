@@ -5,7 +5,9 @@ const HEADER          = [
   "const { http } = require('restutils-helpers');",
   ' '
 ];
-const CONSTANT        = "const %NAME% = '%URL%';";
+// const CONSTANT        = "const %NAME% = '%URL%';";
+// const CONSTANT        = "const { %NAME% } = process.env;";
+const CONSTANT        = "const %NAME% = process.env.%NAME% || '%URL%';";
 const CONSTANT_SUFFIX = '_BASE';
 const URL_TOKEN       = '%URL%';
 const NAME_TOKEN      = '%NAME%';
@@ -26,7 +28,6 @@ const addLines = (opts, lines) => {
 const getConstantsSection = (opts) => {
   const lines = [];
   opts.definitions.filter(x => (x && _.isObject(x.data))).forEach(dev => {
-    // "const %NAME%_BASE = '%URL%';"
     let   name    = `${dev.name.toUpperCase().split('-').join('_')}${CONSTANT_SUFFIX}`;
           name    = name.split('_').filter(x => (x && _.isValidString(x)));
           name    = name.join('_');
@@ -61,7 +62,6 @@ const populateFunctions = (constantName, obj, curUrl, opts) => {
       obj[key] = value;
       opts.output.calls += 1;
     } else {
-      // populateFunctions(constantName, obj[key === '*' ? 'any' : key], url);
       populateFunctions(constantName, obj[key], url, opts);
     }
   });
@@ -111,11 +111,6 @@ const convertToLines = async (obj) => {
     return null;
   }
   lines = lines.map(cleanLine);
-  // for (let i = 0; i < lines.length; i += 1) {
-
-
-  //   lines[i] = cleanLine() lines[i].replace('"', "");
-  // }
   return lines;
 }
 

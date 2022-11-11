@@ -1,4 +1,4 @@
-const http = require('./http');
+const { http } = require('restutils-client');
 
 const CLIENT_A_BASE = 'http://localhost:3001';
 const CLIENT_B_BASE = 'http://localhost:3002';

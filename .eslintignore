@@ -1,6 +1,3 @@
-/src/data/models/*.js
-/prisma/migrations
-schema.prisma
+/src/templates
 _archive
 *removed*
-

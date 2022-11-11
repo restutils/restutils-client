@@ -48,11 +48,11 @@
       "program": "${workspaceFolder}/src/command.js",
       "args": [
         "--host",
-        "http://localhost:3001",
+        "http://localhost:3011",
         "--host",
-        "http://localhost:3002",
+        "http://localhost:3012",
         "--host",
-        "http://localhost:3003",
+        "http://localhost:3013",
       ]
     },
     {

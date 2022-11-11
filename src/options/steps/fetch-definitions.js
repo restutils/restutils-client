@@ -12,7 +12,7 @@ const getUrl = url => {
       base = base.toLowerCase().startsWith(HTTPS) ? base.substr(HTTPS.length) : base;
       base = _.removeSuffix(base, '/');
   return base.includes('/') ? url : [url, DEFAULT_PUBLISH].join('/');
-}
+};
 
 const fetchDefinitions = async (opts) => {
 

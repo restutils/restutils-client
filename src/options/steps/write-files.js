@@ -2,16 +2,10 @@ const os   = require('os');
 const path = require('path');
 const _    = require('restutils-helpers');
 
-const TEMPLATES_FOLDER = path.resolve(path.join(__dirname, '../../templates'));
-// const HTTP_FILENAME    = 'http.js';
 const DEFAULT_FOLDER   = 'restutils';
 const CLIENT_FILENAME  = 'client.js';
 
 const writeFiles = async (opts) => {
-
-  // console.clear();
-  // console.log('--- writeFiles ---');
-  // console.log(JSON.stringify(opts, null, 2));
 
   opts.output = opts.output || {};
   opts.output = {
@@ -28,13 +22,7 @@ const writeFiles = async (opts) => {
     return ['Failure creating output folder.'];
   }
 
-  // const httpSource = path.join(TEMPLATES_FOLDER, HTTP_FILENAME);
-  // const httpTarget = path.join(opts.output.path, HTTP_FILENAME);
   const clientFile = path.join(opts.output.path, CLIENT_FILENAME);
-
-  // if (!_.copyFile(httpSource, httpTarget)) {
-  //   return ['Failure creating output files.'];
-  // }
 
   let fileContents = '';
   opts.lines.forEach(line => {
