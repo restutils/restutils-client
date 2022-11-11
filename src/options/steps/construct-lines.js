@@ -2,7 +2,7 @@ const path = require('path');
 const _    = require('restutils-helpers');
 
 const HEADER          = [
-  "const { http } = require('restutils-helpers');",
+  "const _ = require('restutils-helpers');",
   ' '
 ];
 // const CONSTANT        = "const %NAME% = '%URL%';";
@@ -12,9 +12,9 @@ const CONSTANT_SUFFIX = '_BASE';
 const URL_TOKEN       = '%URL%';
 const NAME_TOKEN      = '%NAME%';
 const EMPTY           = ' ';
-const ANY_FN          = "async (data) => data ? http.doPost(`${%NAME%}/%URL%`, data) : http.doGet(`${%NAME%}/%URL%`)"
-const POST_FN         = "async (data) => http.doPost(`${%NAME%}/%URL%`, data)"
-const GET_FN          = "async (data) => http.doGet(`${%NAME%}/%URL%`)"
+const ANY_FN          = "async (data) => data ? _.http.doPost(`${%NAME%}/%URL%`, data) : _.http.doGet(`${%NAME%}/%URL%`)"
+const POST_FN         = "async (data) => _.http.doPost(`${%NAME%}/%URL%`, data)"
+const GET_FN          = "async (data) => _.http.doGet(`${%NAME%}/%URL%`)"
 const FN_PREFIX       = 'const %NAME% = ';
 const FN_SUFFIX       = ';';
 const EXPORT_START    = 'module.exports = {';

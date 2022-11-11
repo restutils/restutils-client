@@ -1,6 +1,6 @@
 {
   "name"        : "restutils-client",
-  "version"     : "0.3.1",
+  "version"     : "0.3.2",
   "description" : "Generate local client library for the RESTUtils Host",
   "main"        : "src/index.js",
   "preferGlobal": true,

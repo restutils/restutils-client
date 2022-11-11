@@ -8,7 +8,7 @@
 
 * Add support for wildcard routes.
 
-## 20221111 v0.2.0-v0.3.1
+## 20221111 v0.2.0-v0.3.2
 
 * Move upstream calls to [RESTUtils Helpers](https://www.npmjs.com/package/restutils-helpers)
 * Add output summary
