@@ -1,4 +1,4 @@
-![RESTUtils Logo](./docs/images/logo-wide.png)
+![RESTUtils Logo](https://github.com/restutils/restutils-host/raw/main/docs/images/logo-wide.png)
 
 # RESTUtils Host (`restutils-client`)
 
