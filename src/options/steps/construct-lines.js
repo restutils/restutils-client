@@ -12,9 +12,9 @@ const CONSTANT_SUFFIX = '_BASE';
 const URL_TOKEN       = '%URL%';
 const NAME_TOKEN      = '%NAME%';
 const EMPTY           = ' ';
-const ANY_FN          = "async (data) => data ? _.doPost(`${%NAME%}/%URL%`, data) : _.doGet(`${%NAME%}/%URL%`)"
-const POST_FN         = "async (data) => _.doPost(`${%NAME%}/%URL%`, data)"
-const GET_FN          = "async (data) => _.doGet(`${%NAME%}/%URL%`)"
+const ANY_FN          = 'async (data) => data ? _.doPost(`${%NAME%}/%URL%`, data) : _.doGet(`${%NAME%}/%URL%`)';
+const POST_FN         = 'async (data) => _.doPost(`${%NAME%}/%URL%`, data)';
+const GET_FN          = 'async (data) => _.doGet(`${%NAME%}/%URL%`)';
 const FN_PREFIX       = 'const %NAME% = ';
 const FN_SUFFIX       = ';';
 const EXPORT_START    = 'module.exports = {';
@@ -23,7 +23,7 @@ const EXPORT_END      = '};';
 
 const addLines = (opts, lines) => {
   opts.lines.push(...lines);
-}
+};
 
 const getConstantsSection = (opts) => {
   const lines = [];
@@ -33,14 +33,14 @@ const getConstantsSection = (opts) => {
           name    = name.join('_');
     let   url     = _.removeSuffix(dev.url, '/');
     const lastPos = url.lastIndexOf('/');
-          url     = url.substr(0, lastPos)
+          url     = url.substr(0, lastPos);
     
     dev.constant = name;
 
     lines.push(CONSTANT.replaceAll(NAME_TOKEN, name).replaceAll(URL_TOKEN, url));
   });
   return lines;
-}
+};
 const populateFunctions = (constantName, obj, curUrl, opts) => {
 
   Object.keys(obj).forEach(key => {
@@ -66,7 +66,7 @@ const populateFunctions = (constantName, obj, curUrl, opts) => {
     }
   });
 
-}
+};
 const convertKeys = obj => {
   const oldKeys = [];
   Object.keys(obj).forEach(key => {
@@ -78,11 +78,11 @@ const convertKeys = obj => {
   });
   oldKeys.filter(_.isValidString).forEach(key => {
     Reflect.deleteProperty(obj, key);
-  })
+  });
   Object.keys(obj).filter(x => (x && _.isObject(obj[x]))).forEach(key => {
     convertKeys(obj[key]);
   });
-}
+};
 
 const countSpaces = value => {
   const chars = value.split('');
@@ -92,15 +92,15 @@ const countSpaces = value => {
     }
   }
   return -1;
-}
+};
 const cleanLine = value => {
   const count = countSpaces(value);
   const space = (count > 0) ? ''.padStart(count, ' ') : '';
   const line = space + value.trim().split('"').join('');
   return line;
-}
+};
 const convertToLines = async (obj) => {
-  const tmpName = _.getBlockDate() + '.tmp';
+  const tmpName = `${_.getBlockDate()}.tmp`;
   const tmpPath = path.join(__dirname, tmpName);
   let lines = null;
   if (_.writeFile(tmpPath, JSON.stringify(obj, null, 2))) {
@@ -112,7 +112,7 @@ const convertToLines = async (obj) => {
   }
   lines = lines.map(cleanLine);
   return lines;
-}
+};
 
 const constructLines = async (opts) => {
 
@@ -122,7 +122,7 @@ const constructLines = async (opts) => {
   opts.output = {
     ...opts.output,
     calls: 0
-  }
+  };
 
   addLines(opts, HEADER);
   addLines(opts, getConstantsSection(opts));
@@ -135,7 +135,7 @@ const constructLines = async (opts) => {
     const definition = definitions[i];
 
     populateFunctions(definition.constant, definition.data, '', opts);
-    convertKeys(definition.data)
+    convertKeys(definition.data);
 
     definition.lines = await convertToLines(definition.data);
     
@@ -144,7 +144,7 @@ const constructLines = async (opts) => {
     const lastPos = definition.lines.length - 1;
 
     definition.lines[0]       = `${prefix}${definition.lines[0]}`;
-    definition.lines[lastPos] = definition.lines[lastPos] + FN_SUFFIX;
+    definition.lines[lastPos] += FN_SUFFIX;
 
     opts.lines.push(EMPTY);
     opts.lines.push(...definition.lines);

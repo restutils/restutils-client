@@ -12,11 +12,11 @@ const writeFiles = async (opts) => {
     ...opts.output,
     file: CLIENT_FILENAME,
     lines: 0
-  }
+  };
 
   opts.output.path = _.isValidString(opts.path)
     ? path.resolve(opts.path)
-    : path.join(process.cwd(), DEFAULT_FOLDER)
+    : path.join(process.cwd(), DEFAULT_FOLDER);
 
   if (!_.makePath(opts.output.path)) {
     return ['Failure creating output folder.'];
@@ -29,7 +29,7 @@ const writeFiles = async (opts) => {
     fileContents += line;
     fileContents += os.EOL;
     opts.output.lines += 1;
-  })
+  });
 
   if (!_.writeFile(clientFile, fileContents));
 

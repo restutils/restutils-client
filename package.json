@@ -1,6 +1,6 @@
 {
   "name"        : "restutils-client",
-  "version"     : "0.3.3",
+  "version"     : "0.3.4",
   "description" : "Generate local client library for the RESTUtils Host",
   "main"        : "src/index.js",
   "preferGlobal": true,
@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "node-fetch"       : "^2.6.7",
-    "restutils-helpers": "^0.0.14",
+    "restutils-helpers": "^0.0.16",
     "rimraf"           : "^3.0.2",
     "yargs"            : "^17.6.0"
   }
