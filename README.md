@@ -89,6 +89,26 @@ main();
 
 ```
 
+## Environment Variables
+
+To speed up development of your APIs, the URLs provided when you build the client are stored within the generated `client.js` file.  However, you can easily override these URLs at any time using enviornment variables.  They're displayed in the output summary:
+
+```bash
+RESTUtils Client v0.3.0
+FILE : restutils/client.js
+HOSTS: 3
+CALLS: 4
+LINES: 32
+ 
+Override the upstream URLs using environment variables:
+ 
+CLIENT_A_BASE=http://localhost:3011
+CLIENT_B_BASE=http://localhost:3012
+CLIENT_C_BASE=http://localhost:3013
+ 
+Have a great day!
+```
+
 ## Parameters
 
 | Name   | Description           | Type            | Default |
