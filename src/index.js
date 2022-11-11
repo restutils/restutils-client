@@ -1,6 +1,7 @@
 const path    = require('path');
 const _       = require('restutils-helpers');
 const options = require('./options');
+const { displaySummary } = require('./options/steps');
 
 module.exports.processOptions = async (opts) => {
 
@@ -16,6 +17,7 @@ module.exports.processOptions = async (opts) => {
   errors = _.isValidArray(errors) ? errors : await options.steps.fetchDefinitions(opts);
   errors = _.isValidArray(errors) ? errors : await options.steps.constructLines(opts);
   errors = _.isValidArray(errors) ? errors : await options.steps.writeFiles(opts);
+  errors = _.isValidArray(errors) ? errors : displaySummary(opts);
 
   errors = _.unique(errors);
 

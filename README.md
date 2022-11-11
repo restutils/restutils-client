@@ -8,14 +8,6 @@ Generate local client library for APIs created with the [RESTUtils Host](https:/
 
 This package is designed to work exclusively with APIs created using the [RESTUtils Host](https://github.com/restutils/restutils-host) utility.  The [RESTUtils Host](https://github.com/restutils/restutils-host) utility works by instantly generating a web-based API from any JavaScript file or Node package.  The generated routes can be extensive and they change as your file or package matures.  The RESTUtils **Client** package (this one) connects to your APIs and generates a JavaScript / ES6 client library locally so you don't have to remember the upstream URLs.
 
-## Requirements
-
-The generated client library makes use of [Node Fetch](https://www.npmjs.com/package/node-fetch) v2.x.  Install [Node Fetch](https://www.npmjs.com/package/node-fetch) into your application as follows:
-
-```bash
-npm i node-fetch@2
-```
-
 ## Installation
 
 It's best to run from `npx` but it can be installed globally...
@@ -96,7 +88,6 @@ const main = async () => {
 main();
 
 ```
-
 
 ## Parameters
 

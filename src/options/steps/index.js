@@ -6,6 +6,7 @@ const verifyFormats    = require('./verify-formats');
 const fetchDefinitions = require('./fetch-definitions');
 const constructLines   = require('./construct-lines');
 const writeFiles       = require('./write-files');
+const displaySummary   = require('./display-summary');
 
 module.exports = {
   cleanPaths,
@@ -15,5 +16,6 @@ module.exports = {
   verifyFormats,
   fetchDefinitions,
   constructLines,
-  writeFiles
+  writeFiles,
+  displaySummary
 };

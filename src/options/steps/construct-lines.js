@@ -2,7 +2,7 @@ const path = require('path');
 const _    = require('restutils-helpers');
 
 const HEADER          = [
-  "const http = require('./http');",
+  "const { http } = require('restutils-helpers');",
   ' '
 ];
 const CONSTANT        = "const %NAME% = '%URL%';";
@@ -40,7 +40,7 @@ const getConstantsSection = (opts) => {
   });
   return lines;
 }
-const populateFunctions = (constantName, obj, curUrl) => {
+const populateFunctions = (constantName, obj, curUrl, opts) => {
 
   Object.keys(obj).forEach(key => {
 
@@ -48,18 +48,21 @@ const populateFunctions = (constantName, obj, curUrl) => {
     let value = null;
     if (obj[key] === 'POST') {
       value = POST_FN.replaceAll(NAME_TOKEN, constantName).replaceAll(URL_TOKEN, url);
-      obj[key] = value
+      obj[key] = value;
+      opts.output.calls += 1;
     } else if (obj[key] === 'GET') {
       value = GET_FN.replaceAll(NAME_TOKEN, constantName).replaceAll(URL_TOKEN, url);
-      obj[key] = value
+      obj[key] = value;
+      opts.output.calls += 1;
     } else if (obj[key] === 'ANY') {
       value = ANY_FN
         .replaceAll(NAME_TOKEN, constantName).replaceAll(URL_TOKEN, url)
         .replaceAll('/*', '/');
-      obj[key] = value
+      obj[key] = value;
+      opts.output.calls += 1;
     } else {
       // populateFunctions(constantName, obj[key === '*' ? 'any' : key], url);
-      populateFunctions(constantName, obj[key], url);
+      populateFunctions(constantName, obj[key], url, opts);
     }
   });
 
@@ -120,6 +123,12 @@ const constructLines = async (opts) => {
 
   opts.lines = [];
 
+  opts.output = opts.output || {};
+  opts.output = {
+    ...opts.output,
+    calls: 0
+  }
+
   addLines(opts, HEADER);
   addLines(opts, getConstantsSection(opts));
 
@@ -130,7 +139,7 @@ const constructLines = async (opts) => {
 
     const definition = definitions[i];
 
-    populateFunctions(definition.constant, definition.data);
+    populateFunctions(definition.constant, definition.data, '', opts);
     convertKeys(definition.data)
 
     definition.lines = await convertToLines(definition.data);

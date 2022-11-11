@@ -16,6 +16,10 @@ const getUrl = url => {
 
 const fetchDefinitions = async (opts) => {
 
+  // console.clear();
+  // console.log('--- fetchDefinitions ---');
+  // console.log(JSON.stringify(opts, null, 2));
+
   opts.definitions = [];
 
   const urls = [].concat(opts.host).filter(_.isValidString);
