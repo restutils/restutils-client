@@ -1,6 +1,6 @@
 const os   = require('os');
 const path = require('path');
-const _    = require('restutils-helpers');
+const _    = require('restutils-helpers-js');
 
 const DEFAULT_FOLDER   = 'restutils';
 const CLIENT_FILENAME  = 'client.js';

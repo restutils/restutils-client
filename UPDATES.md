@@ -12,3 +12,7 @@
 
 * Move upstream calls to [RESTUtils Helpers](https://www.npmjs.com/package/restutils-helpers)
 * Add output summary
+
+## 20230726 v0.3.5
+
+* Switch from `restutils-helpers` to `restutils-helpers-js`

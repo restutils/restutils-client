@@ -1,8 +1,8 @@
 const path = require('path');
-const _    = require('restutils-helpers');
+const _    = require('restutils-helpers-js');
 
 const HEADER          = [
-  "const _ = require('restutils-helpers');",
+  "const _ = require('restutils-helpers-js');",
   ' '
 ];
 // const CONSTANT        = "const %NAME% = '%URL%';";

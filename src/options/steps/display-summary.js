@@ -1,6 +1,6 @@
 const os   = require('os');
 const path = require('path');
-const _    = require('restutils-helpers');
+const _    = require('restutils-helpers-js');
 const pkg = require('../../../package.json');
 
 const displaySummary = (opts) => {
